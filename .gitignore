@@ -1,0 +1,12 @@
+node_modules/
+.env
+uploads/excel/*
+uploads/video/*
+uploads/archives/*
+uploads/images/*
+!uploads/excel/.gitkeep
+!uploads/video/.gitkeep
+!uploads/archives/.gitkeep
+!uploads/images/.gitkeep
+playwright-report/
+test-results/
