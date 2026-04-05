@@ -12,6 +12,7 @@ const excelRoutes = require('./src/routes/excel.routes');
 const videoRoutes = require('./src/routes/video.routes');
 const archiveRoutes = require('./src/routes/archive.routes');
 const imageRoutes = require('./src/routes/image.routes');
+const formRoutes = require('./src/routes/form.routes');
 const errorHandler = require('./src/middleware/errorHandler');
 
 const app = express();
@@ -34,8 +35,9 @@ app.use(
 // ── Request logging ───────────────────────────────────────────────────────────
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
-// ── Body parser for JSON endpoints ────────────────────────────────────────────
+// ── Body parsers ──────────────────────────────────────────────────────────────
 app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: false, limit: '1mb' }));
 
 // ── Rate limiter applied to all file-upload endpoints ─────────────────────────
 const uploadLimiter = rateLimit({
@@ -71,6 +73,7 @@ app.use('/api/excel', excelRoutes);
 app.use('/api/video', videoRoutes);
 app.use('/api/archive', archiveRoutes);
 app.use('/api/image', imageRoutes);
+app.use('/api/form', formRoutes);
 
 /**
  * @swagger

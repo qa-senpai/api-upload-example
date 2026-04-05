@@ -41,6 +41,7 @@ const options = {
       },
       { name: 'Archive', description: 'Upload and download ZIP archives' },
       { name: 'Image', description: 'Upload and serve JPEG images' },
+      { name: 'Form', description: 'Submit and retrieve URL-encoded form data' },
       { name: 'System', description: 'Health and status endpoints' },
     ],
     components: {
@@ -75,6 +76,28 @@ const options = {
               type: 'object',
               additionalProperties: true,
               example: { name: 'Alice', age: 30 },
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              example: '2026-04-05T12:00:00.000Z',
+            },
+          },
+        },
+
+        // ── Form ────────────────────────────────────────────────────────────
+        FormRecord: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              example: '550e8400-e29b-41d4-a716-446655440000',
+            },
+            data: {
+              type: 'object',
+              additionalProperties: { type: 'string' },
+              example: { name: 'Alice', age: '30' },
             },
             createdAt: {
               type: 'string',

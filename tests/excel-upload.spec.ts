@@ -1,18 +1,20 @@
 import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 // Minimal bytes are enough for this API because validation is MIME-based.
-const fakeXlsxBuffer = Buffer.from('PK\u0003\u0004fake-xlsx-content');
 const plainTextBuffer = Buffer.from('not-an-excel-file');
 
 test.describe('Excel upload API', () => {
   test('uploads an Excel file successfully', async ({ request }) => {
+    const excelBuffer = await readFile('./fixtures/examples excel.xlsx');
+
     const response = await request.post('/api/excel/upload', {
       multipart: {
         file: {
-          name: 'report.xlsx',
+          name: 'examples-excel.xlsx',
           mimeType:
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-          buffer: fakeXlsxBuffer,
+          buffer: excelBuffer,
         },
       },
     });
