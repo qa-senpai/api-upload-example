@@ -10,3 +10,5 @@ uploads/images/*
 !uploads/images/.gitkeep
 playwright-report/
 test-results/
+.DS_Store
+uploads/.DS_Store
